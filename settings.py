@@ -21,3 +21,7 @@ DATABASE = {
 
 if None in DATABASE.values():
     raise InvalidEnvironVariableError(list(DATABASE.keys)[list(DATABASE.values).index(None)])
+
+apps = [
+    'cogs.tag.basic'
+]
