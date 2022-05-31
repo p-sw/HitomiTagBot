@@ -31,16 +31,24 @@ def update_tag():
                 if tag[-1] == '_':
                     tag = tag[:-1]
                 print(f'("{prefix}", "{tag}", {tag_num})')
-                query = f"INSERT INTO Tags VALUES ('{prefix}','{tag}',{tag_num})"
+                query = f"INSERT INTO Tags (prefix, tag, tag_num) VALUES ('{prefix}','{tag}',{tag_num})"
                 db.DB_OBJECT.execute(query)
         db.DB_OBJECT.commit()
 
 
+def db_job():
+    query = input('>>')
+    db.DB_OBJECT.execute(query)
+    db.DB_OBJECT.commit()
+    print("Done.")
+
 if len(sys.argv) > 1:
-    match sys.argv[2:]:
+    match sys.argv[1:]:
         case ["run", call]:
-            match call:
+            match call.lower():
                 case "updatetag":
                     update_tag()
                 case "bot":
                     main.bot.run(bot_token)
+                case "dbjob":
+                    db_job()
