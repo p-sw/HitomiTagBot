@@ -23,5 +23,9 @@ if None in DATABASE.values():
     raise InvalidEnvironVariableError(list(DATABASE.keys)[list(DATABASE.values).index(None)])
 
 apps = [
-    'cogs.tag.basic'
+    'cogs.tag.default'
+]
+
+tester_ids = [
+    "939031979893088328"
 ]
