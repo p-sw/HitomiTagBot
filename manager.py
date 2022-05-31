@@ -1,9 +1,12 @@
 import requests
 from bs4 import BeautifulSoup
 import db
+import sys
+import main
+from settings import bot_token
 
 
-def tag_crawler():
+def update_tag():
     FEMALE = '♀'
     MALE = '♂'
 
@@ -31,4 +34,13 @@ def tag_crawler():
                 query = f"INSERT INTO Tags VALUES ('{prefix}','{tag}',{tag_num})"
                 db.DB_OBJECT.execute(query)
         db.DB_OBJECT.commit()
-tag_crawler()
+
+
+if len(sys.argv) > 1:
+    match sys.argv[2:]:
+        case ["run", call]:
+            match call:
+                case "updatetag":
+                    update_tag()
+                case "bot":
+                    main.bot.run(bot_token)
