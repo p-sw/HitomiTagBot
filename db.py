@@ -1,4 +1,4 @@
-from settings import base
+from settings import *
 import psycopg2
 
 class Databases:
@@ -25,7 +25,7 @@ class Databases:
     def commit(self):
         self.db.commit()
 
-DB_OBJECT = Databases(base.DATABASE)
+DB_OBJECT = Databases(DATABASE)
 
 DB_OBJECT.execute('CREATE TABLE IF NOT EXISTS Tags(prefix varchar(64), tag varchar(64), tag_num int)')
 DB_OBJECT.commit()
