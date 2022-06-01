@@ -1,7 +1,7 @@
 from tkinter import NONE
 import discord
 from discord.ext import commands
-from settings import tester_ids, manage_channel_id
+from settings import tester_ids, manage_channel_id, embed_supporter_text
 from db import DB_OBJECT
 
 class TagConfirmView(discord.ui.View):
@@ -108,6 +108,11 @@ class MainCommand(commands.Cog):
                 inline=False
             )
             embed.color = 0x32FF32
+        embed.add_field(
+            name="개발자 먹여살리기",
+            value=embed_supporter_text,
+            inline=False
+        )
         await ctx.respond(embed=embed)
     
     @commands.slash_command(
@@ -189,6 +194,12 @@ class MainCommand(commands.Cog):
         admin_notice_embed.add_field(
             name="태그 설명",
             value=str(description).replace("￦n", "\n"),
+            inline=False
+        )
+
+        success_embed.add_field(
+            name="개발자 먹여살리기",
+            value=embed_supporter_text,
             inline=False
         )
 

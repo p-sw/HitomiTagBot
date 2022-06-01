@@ -1,4 +1,8 @@
 import os
+from urllib.parse import urlparse
+
+DB_URL = os.environ.get('DATABASE_URL')
+PARSED_URL = urlparse(DB_URL)
 
 class InvalidEnvironVariableError(Exception):
     def __init__(self, msg):
@@ -12,11 +16,11 @@ if bot_token is None:
     raise InvalidEnvironVariableError('BOTTOKEN')
 
 DATABASE = {
-    "DATABASE_HOST": os.environ.get('DATABASE_HOST'),
-    "DATABASE": os.environ.get('DATABASE'),
-    "DATABASE_USER": os.environ.get('DATABASE_USER'),
-    "DATABASE_PORT": "5432",
-    "DATABASE_PASSWORD": os.environ.get('DATABASE_PASSWORD')
+    "DATABASE_HOST": PARSED_URL.hostname,
+    "DATABASE": PARSED_URL.path[1:],
+    "DATABASE_USER": PARSED_URL.username,
+    "DATABASE_PORT": PARSED_URL.port,
+    "DATABASE_PASSWORD": PARSED_URL.password
 }
 
 if None in DATABASE.values():
@@ -36,3 +40,5 @@ admin_guild_id = [
 ]
 
 manage_channel_id = "981195630305214536"
+
+embed_supporter_text = "[커피 한잔만 사주세요](https://buymeacoffee.com/sservekr)"
