@@ -20,7 +20,8 @@ class TagConfirmView(discord.ui.View):
         if self.args['desc']:
             if self.args['tag']:
                 sql += ', '
-            sql += f"korean_desc='{self.args['desc']}'"
+            desc = self.args['desc'].replace("￦n", "\n")
+            sql += f"korean_desc='{desc}'"
         sql += f"WHERE prefix='{self.args['prefix']}' AND tag='{self.args['origin']}'"
         print(sql)
         DB_OBJECT.execute(sql)
@@ -30,7 +31,7 @@ class TagConfirmView(discord.ui.View):
         user = await self.args['bot'].fetch_user(self.args['author'])
         embed = discord.Embed(title='태그 번역/설명이 추가되었습니다.', color=0x32ff32)
         embed.add_field(name="태그 번역", value=str(self.args['tag']))
-        embed.add_field(name="태그 설명", value=str(self.args['desc']), inline=False)
+        embed.add_field(name="태그 설명", value=str(self.args['desc']).replace("￦n", "\n"), inline=False)
         await user.send(embed=embed)
     
     @discord.ui.button(label="Deny", style=discord.ButtonStyle.danger)
@@ -41,7 +42,7 @@ class TagConfirmView(discord.ui.View):
         user = await self.args['bot'].fetch_user(self.args['author'])
         embed = discord.Embed(title='태그 번역/설명이 반려되었습니다.', color=0xff3232)
         embed.add_field(name="태그 번역", value=str(self.args['tag']))
-        embed.add_field(name="태그 설명", value=str(self.args['desc']), inline=False)
+        embed.add_field(name="태그 설명", value=str(self.args['desc']).replace("￦n", "\n"), inline=False)
         await user.send(embed=embed)
 
 
@@ -100,7 +101,7 @@ class MainCommand(commands.Cog):
                 inline=True
             )
             korean_tag = f'{data[0]}:{data[3]}' if data[3] else default_data
-            korean_desc = data[4].replace("￦n", "\n") if data[4] else default_data
+            korean_desc = data[4] if data[4] else default_data
             embed.add_field(
                 name="한국어 정보",
                 value=f'태그 번역 \n**{korean_tag}**\n\n태그 설명 \n{korean_desc}',
