@@ -183,12 +183,12 @@ class MainCommand(commands.Cog):
         
         success_embed.add_field(
             name="태그 설명",
-            value=str(description),
+            value=str(description).replace("￦n", "\n"),
             inline=False
         )
         admin_notice_embed.add_field(
             name="태그 설명",
-            value=str(description),
+            value=str(description).replace("￦n", "\n"),
             inline=False
         )
 
