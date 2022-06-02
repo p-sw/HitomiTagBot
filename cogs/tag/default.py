@@ -52,8 +52,7 @@ class MainCommand(commands.Cog):
     
     @commands.slash_command(
         name="search", 
-        description="태그 검색",
-        guild_ids=tester_ids
+        description="태그 검색"
     )
     async def search(
         self,
@@ -117,8 +116,7 @@ class MainCommand(commands.Cog):
     
     @commands.slash_command(
         name="post",
-        description="한국어 번역과 설명을 추가합니다.",
-        guild_ids=tester_ids
+        description="한국어 번역과 설명을 추가합니다."
     )
     async def post_tag(
         self,
