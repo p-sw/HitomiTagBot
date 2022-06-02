@@ -41,4 +41,4 @@ admin_guild_id = [
 
 manage_channel_id = "981195630305214536"
 
-embed_supporter_text = "[커피 한잔만 사주세요](https://buymeacoffee.com/sservekr)"
+embed_supporter_text = "[밥주세요](https://buymeacoffee.com/sservekr)"
