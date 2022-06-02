@@ -1,7 +1,7 @@
-from settings import apps
+from settings import apps, tester_ids
 import discord
 
-bot = discord.Bot()
+bot = discord.Bot(debug_guilds=tester_ids)
 
 #* Bot code *#
 @bot.event

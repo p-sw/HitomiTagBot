@@ -23,15 +23,12 @@ DATABASE = {
     "DATABASE_PASSWORD": PARSED_URL.password
 }
 
-if None in DATABASE.values():
-    raise InvalidEnvironVariableError(list(DATABASE.keys)[list(DATABASE.values).index(None)])
-
 apps = [
-    'cogs.tag.default'
+    'cogs.tag.default',
+    'cogs.bookmarks.default'
 ]
 
 tester_ids = [
-    "939031979893088328",
     "981191793083306074"
 ]
 
