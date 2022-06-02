@@ -27,5 +27,5 @@ class Databases:
 
 DB_OBJECT = Databases(DATABASE)
 
-DB_OBJECT.execute('CREATE TABLE IF NOT EXISTS Tags(prefix varchar(64), tag varchar(64), tag_num int)')
+DB_OBJECT.execute('CREATE TABLE IF NOT EXISTS Tags(prefix varchar(64), tag varchar(64), tag_num int, korean_tag text, korean_desc text)')
 DB_OBJECT.commit()
