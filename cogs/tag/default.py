@@ -44,10 +44,10 @@ class TagConfirmView(discord.ui.View):
         embed.add_field(name="태그 번역", value=str(self.args['tag']))
         embed.add_field(name="태그 설명", value=str(self.args['desc']).replace("￦n", "\n"), inline=False)
         await user.send(embed=embed)
-
+    
 
 class MainCommand(commands.Cog):
-    def __init__(self, bot):
+    def __init__(self, bot: discord.Bot):
         self.bot = bot
     
     @commands.slash_command(
