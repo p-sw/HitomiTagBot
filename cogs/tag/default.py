@@ -1,7 +1,7 @@
-from tkinter import NONE
 import discord
-from discord.ext import commands
-from settings import tester_ids, manage_channel_id, embed_supporter_text
+from discord.ext.commands import Cog
+from discord.commands import SlashCommandGroup
+from settings import manage_channel_id, embed_supporter_text
 from db import DB_OBJECT
 
 class TagConfirmView(discord.ui.View):
@@ -46,11 +46,13 @@ class TagConfirmView(discord.ui.View):
         await user.send(embed=embed)
     
 
-class MainCommand(commands.Cog):
+class MainCommand(Cog):
     def __init__(self, bot: discord.Bot):
         self.bot = bot
     
-    @commands.slash_command(
+    group = SlashCommandGroup("tag", "태그와 번역본을 검색하거나 등록합니다.")
+
+    @group.command(
         name="search", 
         description="태그 검색"
     )
@@ -114,7 +116,7 @@ class MainCommand(commands.Cog):
         )
         await ctx.respond(embed=embed)
     
-    @commands.slash_command(
+    @group.command(
         name="post",
         description="한국어 번역과 설명을 추가합니다."
     )
