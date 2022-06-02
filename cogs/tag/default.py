@@ -54,7 +54,7 @@ class MainCommand(Cog):
 
     @group.command(
         name="search", 
-        description="태그 검색"
+        description="태그를 검색합니다."
     )
     async def search(
         self,
