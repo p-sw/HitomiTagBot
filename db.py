@@ -28,7 +28,7 @@ class Databases:
 DB_OBJECT = Databases(DATABASE)
 
 DB_OBJECT.execute('CREATE TABLE IF NOT EXISTS Tags(prefix varchar(64), tag varchar(64), tag_num int, korean_tag text, korean_desc text)')
-DB_OBJECT.execute('CREATE TABLE IF NOT EXISTS Bookmarks(uid varchar(64), product_id varchar(32), title text)')
+DB_OBJECT.execute('CREATE TABLE IF NOT EXISTS Bookmarks(uid varchar(64), product_id varchar(32), title text, search text)')
 DB_OBJECT.commit()
 
 print("DB Init end.")
