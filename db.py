@@ -14,11 +14,11 @@ class Databases:
         self.db.close()
         self.cursor.close()
 
-    def execute(self,query,args={}):
-        self.cursor.execute(query,args)
+    def execute(self,query):
+        self.cursor.execute(query)
     
-    def execute_result(self,query,args={}):
-        self.cursor.execute(query,args)
+    def execute_result(self,query):
+        self.cursor.execute(query)
         row = self.cursor.fetchall()
         return row
 
