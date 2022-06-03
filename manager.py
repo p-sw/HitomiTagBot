@@ -2,8 +2,6 @@ import requests
 from bs4 import BeautifulSoup
 import db
 import sys
-import main
-from settings import bot_token
 
 
 def update_tag():
@@ -50,6 +48,8 @@ if len(sys.argv) > 1:
                     update_tag()
                 case "bot":
                     print("Starting bot")
+                    import main
+                    from settings import bot_token
                     main.bot.run(bot_token)
                 case "dbjob":
                     db_job()
