@@ -49,6 +49,7 @@ if len(sys.argv) > 1:
                 case "updatetag":
                     update_tag()
                 case "bot":
+                    print("Starting bot")
                     main.bot.run(bot_token)
                 case "dbjob":
                     db_job()

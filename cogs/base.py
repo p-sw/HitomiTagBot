@@ -6,6 +6,10 @@ class BaseEventHandler(commands.Cog):
         self.bot = bot
     
     @commands.Cog.listener()
+    async def on_connect(self):
+        print(f"Connected to discord.")
+    
+    @commands.Cog.listener()
     async def on_ready(self):
         print(f"Logged in as {self.bot.user}")
 

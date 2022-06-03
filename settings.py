@@ -25,7 +25,8 @@ DATABASE = {
 
 apps = [
     'cogs.tag.default',
-    'cogs.bookmarks.default'
+    'cogs.bookmarks.default',
+    'cogs.base'
 ]
 
 tester_ids = [
@@ -39,3 +40,5 @@ admin_guild_id = [
 manage_channel_id = "981195630305214536"
 
 embed_supporter_text = "[밥주세요](https://buymeacoffee.com/sservekr)"
+
+print("Config loaded.")

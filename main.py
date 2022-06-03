@@ -3,10 +3,8 @@ import discord
 
 bot = discord.Bot(debug_guilds=tester_ids)
 
-#* Bot code *#
-@bot.event
-async def on_ready():
-    print(f"Started bot as {bot.user}")
-
 for app in apps:
+    print(f"Loading Cog: {app}")
     bot.load_extension(app)
+    print(f"Cog loaded..")
+print(f"Bot fully loaded.")
