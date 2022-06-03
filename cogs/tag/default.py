@@ -53,10 +53,10 @@ class MainCommand(Cog):
     group = SlashCommandGroup("tag", "태그와 번역본을 검색하거나 등록합니다.")
 
     @group.command(
-        name="search", 
-        description="태그를 검색합니다."
+        name="get", 
+        description="태그 정보를 가져옵니다."
     )
-    async def search(
+    async def get_tag(
         self,
         ctx, 
         prefix: discord.Option(
@@ -217,6 +217,65 @@ class MainCommand(Cog):
                 bot=self.bot
             )
         )
+    
+    @group.command(
+        name="search",
+        description="입력과 유사한 태그를 불러옵니다.\n(현재는 영어 검색만 가능합니다.)"
+    )
+    async def search_tag(
+        self,
+        ctx,
+        prefix:discord.Option(
+            str,
+            "태그의 종류를 나타냅니다.",
+            choices=[
+                discord.OptionChoice(
+                    name="female(여성)",
+                    value="female"
+                ),
+                discord.OptionChoice(
+                    name="male(남성)",
+                    value="male"
+                ),
+                discord.OptionChoice(
+                    name="type(공통)",
+                    value="type"
+                )
+            ]
+        ),
+        tag: discord.Option(
+            str,
+            "검색할 태그 이름을 적어주세요."
+        ),
+        search_limit: discord.Option(
+            int,
+            "검색 한도를 정해주세요. (기본 10)"
+        ) = 10
+    ):
+        query_result = []
+        sql = "SELECT * FROM Tags WHERE prefix='{}' AND tag LIKE '{}'"
+
+        for i in range(0, -len(tag)-1, -1):
+            newtag = tag[0:i] + '_'*i if i != 0 else tag
+            query_result += DB_OBJECT.execute_result(sql.format(prefix, newtag))
+            query_result += DB_OBJECT.execute_result(sql.format(prefix, newtag+"%"))
+            if len(query_result) >= search_limit:
+                query_result = query_result[:search_limit]
+                break
+        
+        if query_result:
+            result_text = "\n\n".join([f"{item[0]}:{item[1]} ({item[2]}개 작품)" for item in query_result])
+        else:
+            result_text = "입력한 내용을 찾을 수 없었어요.\n"
+
+        embed = discord.Embed(title=f'검색 결과 (상위 {str(search_limit)}개)')
+        embed.add_field(name="결과", value=result_text)
+        embed.add_field(
+            name="개발자 먹여살리기",
+            value=embed_supporter_text,
+            inline=False
+        )
+        await ctx.respond(embed=embed)
 
 def setup(bot):
     bot.add_cog(MainCommand(bot))
